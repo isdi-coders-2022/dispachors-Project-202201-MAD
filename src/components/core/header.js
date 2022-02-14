@@ -1,7 +1,7 @@
 export function Header() {
     return (
         <header>
-            <span className="iconify" data-icon="ep:orange" />
+            <span role="img" className="iconify" data-icon="ep:orange" />
         </header>
     );
 }
