@@ -1,8 +1,9 @@
-import { getFromCategory } from './services/PRH-api';
+import { Header } from './components/core/header';
 
-export async function App() {
-    const catBooks = await getFromCategory(93);
-    console.log(catBooks);
-
-    return <div className="app" />;
+export function App() {
+    return (
+        <div className="app">
+            <Header />
+        </div>
+    );
 }

@@ -1,7 +1,15 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
+
+import { User } from './user';
+
+import './header.scss';
+
 export function Header() {
     return (
-        <header>
-            <span role="img" className="iconify" data-icon="ep:orange" />
+        <header className="header">
+            <FontAwesomeIcon icon={faBookOpen} className="header__icon" />
+            <User />
         </header>
     );
 }
