@@ -6,6 +6,6 @@ describe('Given the component Menu', () => {
         test('Then it should appear on the screen', () => {});
         render(<User />);
         expect(screen.getByText(/pepe/i)).toBeTruthy();
-        expect(screen.getAllByAltText(/pepe/i)).toBeTruthy();
+        expect(screen.getByAltText(/pepe/i)).toBeTruthy();
     });
 });
