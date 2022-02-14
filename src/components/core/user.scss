@@ -1,0 +1,12 @@
+.app-user {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    &__user-name {
+        margin: 1em;
+    }
+    &__image {
+        width: 2.43rem;
+        height: 2.43rem;
+    }
+}
