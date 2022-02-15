@@ -1,4 +1,6 @@
-.category {
+.category,
+.pending,
+.read {
     width: 100vw;
     &__title {
         margin: 20px;
