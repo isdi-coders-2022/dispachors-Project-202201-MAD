@@ -1,0 +1,22 @@
+.category {
+    width: 100vw;
+    &__title {
+        margin: 20px;
+    }
+    &__books {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+
+        overflow: auto;
+        //display: flex;
+        //flex-direction: row;
+        list-style: none;
+        //gap: 10px;
+        margin: 10px;
+    }
+}
+
+@media (min-width: 600px) {
+}
