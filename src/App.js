@@ -1,21 +1,16 @@
-import { Category } from './components/category';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/core/header';
 import { Menu } from './components/core/menu';
-import { randomCategories } from './services/helpers';
-import { ReadBooks } from './components/read-books';
+import { Home } from './components/home/home';
 
 export function App() {
     return (
         <div className="app">
             <Header />
-            <ReadBooks />
-            {randomCategories().map((item) => (
-                <Category
-                    key={item.id}
-                    catID={item.id}
-                    categoryName={item.catName}
-                />
-            ))}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+            </Routes>
             <Menu />
         </div>
     );

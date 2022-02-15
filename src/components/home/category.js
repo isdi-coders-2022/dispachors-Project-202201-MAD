@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Book } from './book';
-import * as api from '../services/PRH-api';
+import { Book } from '../core/book';
+import * as api from '../../services/PRH-api';
 import './category.scss';
 
 export function Category({ catID, categoryName }) {
