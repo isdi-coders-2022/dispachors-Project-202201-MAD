@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Context } from '../../context/context-provider';
-import { Book } from './book';
+import { Book } from '../core/book';
 
 export function BooksToRead() {
     const { userBooks } = useContext(Context);

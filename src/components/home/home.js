@@ -1,11 +1,11 @@
-import { ReadBooks } from '../read-books';
 import { Category } from './category';
 import { randomCategories } from '../../services/helpers';
+import { BooksToRead } from './books-to-read';
 
 export function Home() {
     return (
         <>
-            <ReadBooks />
+            <BooksToRead />
             {randomCategories().map((item) => (
                 <Category
                     key={item.id}
