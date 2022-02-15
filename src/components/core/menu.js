@@ -11,9 +11,15 @@ import './menu.scss';
 export function Menu() {
     return (
         <div className="menu">
-            <FontAwesomeIcon icon={faHouse} />
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-            <FontAwesomeIcon icon={faBookmark} />
+            <div role="menuitem">
+                <FontAwesomeIcon icon={faHouse} />
+            </div>
+            <div role="menuitem">
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </div>
+            <div role="menuitem">
+                <FontAwesomeIcon icon={faBookmark} />
+            </div>
         </div>
     );
 }
