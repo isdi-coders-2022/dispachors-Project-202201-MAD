@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { Context } from '../../context/context-provider';
-import { Book } from '../book';
+import { Book } from './book';
 
-export function BooksToRead({}) {
+export function BooksToRead() {
     const { userBooks } = useContext(Context);
     console.log(userBooks);
 

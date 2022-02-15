@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import { Context } from '../context/context-provider';
-import { Book } from './book';
+import { Book } from './core/book';
 
 export function ReadBooks() {
     const { userBooks } = useContext(Context);
-    console.log(userBooks);
 
     return (
         <div className="read">
