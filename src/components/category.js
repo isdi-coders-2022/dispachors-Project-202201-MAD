@@ -10,14 +10,14 @@ export function Category({ catID, categoryName }) {
         api.getFromCategory(catID).then((Response) => {
             setCategoryBooks(Response.data.data.titles);
         });
-    }, []);
+    }, [catID]);
 
     return (
         <div className="category">
             <h2 className="category__title">{categoryName}</h2>
             <ul className="category__books">
                 {categoryBooks.map((item) => (
-                    <Book book={item} />
+                    <Book key={item.isbn} book={item} />
                 ))}
             </ul>
         </div>
