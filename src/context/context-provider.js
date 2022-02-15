@@ -4,7 +4,7 @@ import { Reducer } from '../reducers/reducers';
 import * as api from '../services/PRH-api';
 import * as action from '../reducers/action-creators';
 
-const Context = createContext();
+export const Context = createContext();
 
 export function ContextProvider({ children }) {
     const [userBooks, dispatcher] = useReducer(Reducer, []);
@@ -16,7 +16,6 @@ export function ContextProvider({ children }) {
 
         api.getFromSaved().then((Response) => {
             dispatcher(action.loadBooks(Response.data));
-            console.log(Response.data);
         });
     }, []);
 
@@ -28,6 +27,7 @@ export function ContextProvider({ children }) {
 
     const contextValue = {
         addBook,
+        userBooks,
     };
 
     return <Context.Provider value={contextValue}>{children}</Context.Provider>;
