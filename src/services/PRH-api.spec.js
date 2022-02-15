@@ -61,7 +61,7 @@ describe('Given the function getFromSaved in PRH-api.js', () => {
                 )
             );
 
-            await expect((await api.getFromSaved()).data).toEqual([
+            expect((await api.getFromSaved()).data).toEqual([
                 {
                     title: 'Romeo & Juliet',
                     author: 'Shakespeare',
@@ -100,7 +100,7 @@ describe('Given the function saveBook in PRH-api.js', () => {
                 )
             );
 
-            await expect(
+            expect(
                 (
                     await api.saveBook({
                         title: 'Romeo & Juliet',
