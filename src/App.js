@@ -1,6 +1,7 @@
 import { Category } from './components/category';
 import { Header } from './components/core/header';
 import { Menu } from './components/core/menu';
+import { BooksToRead } from './components/core/books-to-read';
 
 export function App() {
     return (
@@ -9,6 +10,7 @@ export function App() {
             {randomCategories().map((item) => (
                 <Category catID={item.id} categoryName={item.catName} />
             ))}
+            <BooksToRead />
             <Menu />
         </div>
     );
@@ -34,7 +36,6 @@ const randomCategories = () => {
     const randomCat = [...categories];
     for (let i = 0; i < 7; i += 1) {
         const aleatorio = Math.floor(Math.random() * randomCat.length);
-        const numRandom = randomCat[aleatorio];
         randomCat.splice(aleatorio, 1);
     }
     return randomCat;
