@@ -1,3 +1,14 @@
 {
-    "books": []
+    "books": [
+        {
+            "title": "Romeo & Juliet",
+            "author": "Shakespeare",
+            "id": 1
+        },
+        {
+            "title": "Romeo & Juliet",
+            "author": "Shakespeare",
+            "id": 2
+        }
+    ]
 }
