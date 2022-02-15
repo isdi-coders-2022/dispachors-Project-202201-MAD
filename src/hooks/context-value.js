@@ -16,10 +16,8 @@ export function useContextValue() {
         dispatcher(action.addBook(book));
     };
 
-    const contextValue = {
+    return {
         addBook,
         userBooks,
     };
-
-    return contextValue;
 }
