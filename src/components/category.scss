@@ -1,0 +1,17 @@
+.category {
+    width: 100vw;
+    &__title {
+        margin: 20px;
+    }
+    &__books {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        overflow: auto;
+        list-style: none;
+        margin: 10px;
+    }
+}
+
+@media (min-width: 600px) {
+}
