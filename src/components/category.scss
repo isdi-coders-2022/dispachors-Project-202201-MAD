@@ -1,4 +1,6 @@
-.category {
+.category,
+.pending,
+.read {
     width: 100vw;
     font-weight: bold;
     &__title {
