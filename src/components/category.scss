@@ -1,15 +1,18 @@
 .category {
     width: 100vw;
+    font-weight: bold;
     &__title {
         margin: 20px;
     }
     &__books {
         width: 100%;
-        display: grid;
-        grid-template-columns: auto auto auto auto auto;
+        display: flex;
+        align-items: center;
+
         overflow: auto;
         list-style: none;
         margin: 10px;
+        gap: 22px;
     }
 }
 
