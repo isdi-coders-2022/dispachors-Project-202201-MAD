@@ -9,6 +9,7 @@ export function App() {
         <div className="app">
             <Header />
             <ReadBooks />
+            <BooksToRead />
             {randomCategories().map((item) => (
                 <Category
                     key={item.id}
@@ -16,7 +17,7 @@ export function App() {
                     categoryName={item.catName}
                 />
             ))}
-            <BooksToRead />
+
             <Menu />
         </div>
     );
