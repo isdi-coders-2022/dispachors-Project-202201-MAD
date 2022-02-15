@@ -7,18 +7,12 @@ export function useContextValue() {
     const [userBooks, dispatcher] = useReducer(Reducer, []);
 
     useEffect(() => {
-        // const savedBooks = api.getFromSaved();
-        // const loadSavedAction = action.loadBooks(savedBooks);
-        // dispatcher(loadSavedAction);
-
         api.getFromSaved().then((Response) => {
             dispatcher(action.loadBooks(Response.data));
         });
     }, []);
 
     const addBook = (book) => {
-        // const addBookAction = action.addBook(book);
-        // dispatcher(addBookAction);
         dispatcher(action.addBook(book));
     };
 
