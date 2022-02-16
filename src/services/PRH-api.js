@@ -24,7 +24,7 @@ export const deleteBook = (book) => {
 };
 
 export const updateBook = (book) => {
-    const URL = `http://localhost:4500/books/`;
+    const URL = `http://localhost:4500/books/${book.id}`;
 
     return axios.patch(URL, book);
 };
