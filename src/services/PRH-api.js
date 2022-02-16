@@ -6,6 +6,8 @@ export const getFromCategory = (catID) => {
     return axios.get(URL);
 };
 
+export const getFromUrl = (url) => axios.get(url);
+
 export const getFromSaved = () => {
     const URL = `http://localhost:4500/books/`;
     return axios.get(URL);
