@@ -39,14 +39,14 @@ describe('Given the function removeBook', () => {
 describe('Given the function updateBook', () => {
     describe('Whem importing it', () => {
         test('then, it should work like this', () => {
-            const update = (book) => ({
+            const updateBook = (book) => ({
                 type: actionTypes.update,
                 book,
             });
 
             const book = { cosicas: 'estas' };
 
-            expect(update(book)).toEqual({
+            expect(updateBook(book)).toEqual({
                 book: { cosicas: 'estas' },
                 type: '@books/update',
             });
