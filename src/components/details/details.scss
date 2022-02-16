@@ -1,0 +1,41 @@
+section {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section h2 {
+  margin-left: 200px;
+}
+
+.book-title {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.double-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.synopsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttons-container__button {
+  border-radius: 10px 10px 10px 10px;
+  background-color: white;
+  box-shadow: -1px 2px 5px rgb(71, 70, 70);
+  padding-left: 20px;
+  padding-right: 20px;
+}
