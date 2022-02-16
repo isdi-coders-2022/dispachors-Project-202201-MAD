@@ -35,8 +35,9 @@ export function Details() {
         <>
             <img className="details__image" src={bookState.image} alt="" />
             {}
-            <p>Este es el libro número {isbn}</p>
-            <p>Con título: {bookState.title}</p>
+            <div className='details__info'>
+                <p>{bookState.}</p>
+            </div>
             <div
                 className="Container"
                 dangerouslySetInnerHTML={{ __html: bookState.jacketquotes }}
