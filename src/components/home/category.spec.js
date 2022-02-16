@@ -45,22 +45,5 @@ describe('Given the component Category', () => {
 
             expect(screen.getByText(/Shakespeare/i)).toBeTruthy();
         });
-        test('Or catch an error', async () => {
-            server.use(
-                rest.get(URL, (req, response, context) =>
-                    response(context.status(404))
-                )
-            );
-
-            await render(
-                <Category
-                    key={item.id}
-                    catID={item.id}
-                    categoryName={item.catName}
-                />
-            );
-
-            expect(screen.queryByAltText(/book/i)).toBeFalsy();
-        });
     });
 });
