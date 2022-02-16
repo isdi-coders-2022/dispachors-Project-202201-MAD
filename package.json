@@ -26,7 +26,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "react-scripts test --coverage all",
+        "test:coverage": "jest --coverage",
         "lint": "eslint .",
         "eject": "react-scripts eject",
         "sass": "Sass --watch ./src/sass:./src/css"
