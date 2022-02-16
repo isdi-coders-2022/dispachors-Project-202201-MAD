@@ -2,7 +2,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as api from '../../services/PRH-api';
-import { Menu } from '../core/menu';
+import './details.scss';
 
 export function Details() {
     const [bookState, setBookState] = useState([]);
@@ -32,37 +32,26 @@ export function Details() {
     console.log(bookState.jacketquotes);
 
     return (
-        <>
-            <img className="details__image" src={bookState.image} alt="" />
-            {}
-            <div className='details__info'>
-                <p>{bookState.}</p>
-            </div>
-            <div
-                className="Container"
-                dangerouslySetInnerHTML={{ __html: bookState.jacketquotes }}
-            />
-        </>
-import './details.scss';
-
-export function Details() {
-    return (
         <section>
-            <h2 className="book-title">Título</h2>
+            <h2 className="book-title">{bookState.title}</h2>
             <div className="double-container">
-                <div className="double-container__book-cover">Portada</div>
+                <img
+                    className="double-container__book-cover"
+                    src={bookState.image}
+                    alt=""
+                />
                 <div className="double-container__book-details">
-                    <p>Author:</p>
-                    <p>Year of Publication:</p>
-                    <p>Year of Edition:</p>
-                    <p>Year of Edition:</p>
-                    <p>Category:</p>
+                    <p>Author: {bookState.author}</p>
+                    <p>Pages: {bookState.pages}</p>
                     <p>Topics:</p>
                 </div>
             </div>
 
             <div className="synopsis">
-                <h3>Synopsis</h3>
+                <div
+                    className="Container"
+                    dangerouslySetInnerHTML={{ __html: bookState.jacketquotes }}
+                />
             </div>
             <div className="buttons-container">
                 <input
