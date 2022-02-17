@@ -5,7 +5,7 @@ import './user.scss';
 
 export function User() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
-    const userName = isAuthenticated ? 'Logout' : 'Login';
+    const userStatus = isAuthenticated ? 'Logout' : 'Login';
     const userPic = isAuthenticated ? user.picture : '';
     const handleClick = () => {
         isAuthenticated ? logout() : loginWithRedirect();
@@ -28,7 +28,7 @@ export function User() {
                         onClick={handleClick}
                         className="app-user__user-name"
                     >
-                        {userName}
+                        {userStatus}
                     </span>
                 </>
             ) : (
@@ -38,7 +38,7 @@ export function User() {
                     onClick={handleClick}
                     className="app-user__user-name"
                 >
-                    {userName}
+                    {userStatus}
                 </span>
             )}
         </div>

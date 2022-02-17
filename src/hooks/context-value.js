@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { useReducer, useEffect } from 'react';
 import { Reducer } from '../reducers/reducers';
 import * as api from '../services/PRH-api';
@@ -12,12 +13,19 @@ export function useContextValue() {
         });
     }, []);
 
+    const { user } = useAuth0();
+
     const addBook = (book) => {
         dispatcher(action.addBook(book));
+    };
+
+    const userExists = () => {
+        console.log(user.sub);
     };
 
     return {
         addBook,
         userBooks,
+        userExists,
     };
 }

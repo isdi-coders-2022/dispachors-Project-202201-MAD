@@ -9,17 +9,17 @@ import { ContextProvider } from './context/context-provider';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ContextProvider>
-            <BrowserRouter>
-                <Auth0Provider
-                    domain="dev-tbdb7-ah.us.auth0.com"
-                    clientId="msHFZi5o44WFfAiY5HCBk9w5ebn6rDeI"
-                    redirectUri={window.location.origin}
-                >
+        <Auth0Provider
+            domain="dev-tbdb7-ah.us.auth0.com"
+            clientId="msHFZi5o44WFfAiY5HCBk9w5ebn6rDeI"
+            redirectUri={window.location.origin}
+        >
+            <ContextProvider>
+                <BrowserRouter>
                     <App />
-                </Auth0Provider>
-            </BrowserRouter>
-        </ContextProvider>
+                </BrowserRouter>
+            </ContextProvider>
+        </Auth0Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
