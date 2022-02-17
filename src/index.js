@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
@@ -10,7 +11,13 @@ ReactDOM.render(
     <React.StrictMode>
         <ContextProvider>
             <BrowserRouter>
-                <App />
+                <Auth0Provider
+                    domain="dev-tbdb7-ah.us.auth0.com"
+                    clientId="msHFZi5o44WFfAiY5HCBk9w5ebn6rDeI"
+                    redirectUri={window.location.origin}
+                >
+                    <App />
+                </Auth0Provider>
             </BrowserRouter>
         </ContextProvider>
     </React.StrictMode>,
