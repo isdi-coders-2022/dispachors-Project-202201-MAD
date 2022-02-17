@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faHouse,
@@ -11,15 +12,19 @@ import './menu.scss';
 export function Menu() {
     return (
         <div className="menu">
-            <div role="menuitem">
-                <FontAwesomeIcon icon={faHouse} />
-            </div>
-            <div role="menuitem">
+            <Link to="/home">
+                <div role="menuitem">
+                    <FontAwesomeIcon icon={faHouse} />
+                </div>
+            </Link>
+            {/* <div role="menuitem">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </div>
-            <div role="menuitem">
-                <FontAwesomeIcon icon={faBookmark} />
-            </div>
+            </div> */}
+            <Link to="/my-books">
+                <div role="menuitem">
+                    <FontAwesomeIcon icon={faBookmark} />
+                </div>
+            </Link>
         </div>
     );
 }

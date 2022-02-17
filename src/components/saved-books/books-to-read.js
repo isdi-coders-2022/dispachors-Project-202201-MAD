@@ -6,9 +6,9 @@ import { Book } from '../core/book';
 export function BooksToRead() {
     const { userBooks } = useContext(Context);
     const { user } = useAuth0();
-    const booksToPrint = userBooks.filter((item) => item.user === user.sub);
-
-    console.log(booksToPrint);
+    const booksToPrint = userBooks.filter(
+        (item) => item.user === user?.sub && item.isRead === false
+    );
 
     return (
         <div className="pending">

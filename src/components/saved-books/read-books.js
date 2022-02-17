@@ -5,16 +5,16 @@ import { Book } from '../core/book';
 
 export function ReadBooks() {
     const { userBooks } = useContext(Context);
-    const { user, isAuthenticated } = useAuth0();
-    const booksToPrint = isAuthenticated
-        ? userBooks.find((item) => item.user === user.sub)
-        : {};
+    const { user } = useAuth0();
+    const booksToPrint = userBooks.filter(
+        (item) => item.user === user?.sub && item.isRead === true
+    );
 
     return (
-        <div className="read">
-            <h2 className="read__title">Libros leídos</h2>
-            <ul className="read__books">
-                {booksToPrint.books === undefined ? (
+        <div className="pending">
+            <h2 className="pending__title">Libros leídos</h2>
+            <ul className="pending__books">
+                {booksToPrint.length === 0 ? (
                     <p>Aún no has guardado ningún libro</p>
                 ) : (
                     booksToPrint.map((item) => (
