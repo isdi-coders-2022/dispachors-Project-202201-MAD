@@ -107,7 +107,13 @@ export function Details() {
                             onClick={handleDelete}
                             className="actions__delete-button"
                             type="button"
-                            value="Delete"
+                            value={
+                                userBooks.find(
+                                    (item) => item.isbn === bookState.isbn
+                                ).isRead === true
+                                    ? 'mark as unread'
+                                    : 'delete'
+                            }
                         />
                     )}
                 </div>
