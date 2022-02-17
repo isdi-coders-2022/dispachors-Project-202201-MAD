@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from 'react';
 import * as api from '../../services/PRH-api';
 import './details.scss';
 import { Context } from '../../context/context-provider';
+import { StarRating } from '../saved-books/star-rating';
 
 export function Details() {
     const { user, isAuthenticated } = useAuth0();
@@ -47,6 +48,7 @@ export function Details() {
             isbn: bookState.isbn,
             _links: [{}, { href: bookState.image }],
             isRead: false,
+            rating: 0,
         };
         addBook(bookToAdd);
     };
@@ -68,6 +70,15 @@ export function Details() {
                     alt=""
                 />
                 <div className="book-data__details">
+                    <StarRating
+                        rating={
+                            userBooks.find(
+                                (item) =>
+                                    item.isbn === bookState.isbn &&
+                                    item.user === user?.sub
+                            )?.rating
+                        }
+                    />
                     <p>Author: {bookState.author}</p>
                     <p>Pages: {bookState.pages}</p>
                     <p>Topics:</p>
