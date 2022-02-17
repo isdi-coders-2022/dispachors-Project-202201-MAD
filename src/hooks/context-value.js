@@ -15,7 +15,6 @@ export function useContextValue() {
     const addBook = (book) => {
         console.log(book);
         api.saveBook(book).then((resp) => {
-            console.log(resp.data);
             dispatcher(action.addBook(resp.data));
         });
     };
@@ -26,6 +25,7 @@ export function useContextValue() {
     };
 
     const updateBook = (book) => {
+        api.updateBook(book);
         dispatcher(action.updateBook(book));
     };
 
