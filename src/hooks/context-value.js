@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { useReducer, useEffect } from 'react';
 import { Reducer } from '../reducers/reducers';
 import * as api from '../services/PRH-api';
@@ -13,10 +12,17 @@ export function useContextValue() {
         });
     }, []);
 
-    const { user } = useAuth0();
+    const addBook = (book) => {
+        console.log(book);
+        api.saveBook(book).then((resp) => {
+            console.log(resp.data);
+            dispatcher(action.addBook(resp.data));
+        });
+    };
 
-    const addBook = (book, userID) => {
-        dispatcher(action.addBook(book, userID));
+    const deleteBook = (book) => {
+        api.deleteBook(book);
+        dispatcher(action.removeBook(book));
     };
 
     const updateBook = (book) => {
@@ -31,5 +37,6 @@ export function useContextValue() {
         userBooks,
         userExists,
         updateBook,
+        deleteBook,
     };
 }

@@ -9,7 +9,7 @@ import { Context } from '../../context/context-provider';
 
 export function Details() {
     const { user } = useAuth0();
-    const { userExists, addUser, addBook } = useContext(Context);
+    const { addBook, userBooks, deleteBook } = useContext(Context);
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
     const titleURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}?api_key=mdmzpbe68gz2cc23pc7dhs28`;
@@ -35,13 +35,27 @@ export function Details() {
     }, []);
 
     const handleSave = () => {
+        if (
+            userBooks.filter(
+                (item) => item.isbn === bookState.isbn && item.user === user.sub
+            ).length !== 0
+        )
+            return;
+
         const bookToAdd = {
-            saved: true,
             user: user.sub,
             isbn: bookState.isbn,
             _links: [{}, { href: bookState.image }],
+            isRead: false,
         };
-        userExists(user.sub) ? addBook(bookToAdd, user.sub) : addUser();
+        addBook(bookToAdd);
+    };
+
+    const handleDelete = () => {
+        const bookToDelete = userBooks.find(
+            (item) => item.isbn === bookState.isbn && item.user === user.sub
+        );
+        if (bookToDelete !== undefined) deleteBook(bookToDelete);
     };
 
     return (
@@ -74,6 +88,7 @@ export function Details() {
                     value="Save"
                 />
                 <input
+                    onClick={handleDelete}
                     className="actions__delete-button"
                     type="button"
                     value="Delete"

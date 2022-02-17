@@ -6,14 +6,7 @@ export function Reducer(state, action) {
             return [...action.books];
 
         case actionTypes.add:
-            return state.map((item) =>
-                item.user === action.userID
-                    ? { ...item, books: [...item.books, action.book] }
-                    : item
-            );
-
-        case actionTypes.addUser:
-            return [...state, { user: action.userID, books: [] }];
+            return [...state, action.book];
 
         case actionTypes.remove:
             return state.filter((item) => item.id !== action.book.id);
