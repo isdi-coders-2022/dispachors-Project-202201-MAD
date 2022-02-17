@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { render, screen } from '@testing-library/react';
 import { ReadBooks } from './read-books';
-import { Context } from '../context/context-provider';
+import { Context } from '../../context/context-provider';
 
 const contextValue = {
     userBooks: [

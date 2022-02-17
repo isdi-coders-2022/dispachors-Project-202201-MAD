@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useContext } from 'react';
-import { Context } from '../context/context-provider';
-import { Book } from './core/book';
+import { Context } from '../../context/context-provider';
+import { Book } from '../core/book';
 
 export function ReadBooks() {
     const { userBooks } = useContext(Context);
