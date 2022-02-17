@@ -32,35 +32,35 @@ export function Details() {
     console.log(bookState.jacketquotes);
 
     return (
-        <section>
-            <h2 className="book-title">{bookState.title}</h2>
-            <div className="double-container">
+        <section className="book-data">
+            <h2 className="book-data__title">{bookState.title}</h2>
+            <div className="book-data__top-details">
                 <img
-                    className="double-container__book-cover"
+                    className="book-data__cover"
                     src={bookState.image}
                     alt=""
                 />
-                <div className="double-container__book-details">
+                <div className="book-data__details">
                     <p>Author: {bookState.author}</p>
                     <p>Pages: {bookState.pages}</p>
                     <p>Topics:</p>
                 </div>
             </div>
 
-            <div className="synopsis">
-                <div
-                    className="Container"
+            <div className="book-data__synopsis">
+                <p
+                    className="book-data__synopsis-text"
                     dangerouslySetInnerHTML={{ __html: bookState.jacketquotes }}
                 />
             </div>
-            <div className="buttons-container">
+            <div className="actions">
                 <input
-                    className="buttons-container__button"
+                    className="actions__save-button"
                     type="button"
                     value="Save"
                 />
                 <input
-                    className="buttons-container__button"
+                    className="actions__delete-button"
                     type="button"
                     value="Delete"
                 />
