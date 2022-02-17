@@ -15,17 +15,21 @@ export function useContextValue() {
 
     const { user } = useAuth0();
 
-    const addBook = (book) => {
-        dispatcher(action.addBook(book));
+    const addBook = (book, userID) => {
+        dispatcher(action.addBook(book, userID));
     };
 
-    const userExists = () => {
-        console.log(user.sub);
+    const updateBook = (book) => {
+        dispatcher(action.updateBook(book));
     };
+
+    const userExists = (userID) =>
+        userBooks.find((item) => item.user === userID) !== undefined;
 
     return {
         addBook,
         userBooks,
         userExists,
+        updateBook,
     };
 }

@@ -9,7 +9,7 @@ import { Context } from '../../context/context-provider';
 
 export function Details() {
     const { user } = useAuth0();
-    const { userExists } = useContext(Context);
+    const { userExists, addUser, addBook } = useContext(Context);
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
     const titleURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}?api_key=mdmzpbe68gz2cc23pc7dhs28`;
@@ -41,7 +41,7 @@ export function Details() {
             isbn: bookState.isbn,
             _links: [{}, { href: bookState.image }],
         };
-        userExists();
+        userExists(user.sub) ? addBook(bookToAdd, user.sub) : addUser();
     };
 
     return (
