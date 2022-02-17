@@ -1,8 +1,14 @@
 import { actionTypes } from './action-types';
 
-export const addBook = (book) => ({
+export const addBook = (book, userID) => ({
     type: actionTypes.add,
     book,
+    userID,
+});
+
+export const addUser = (userID) => ({
+    type: actionTypes.addUser,
+    userID,
 });
 
 export const removeBook = (book) => ({

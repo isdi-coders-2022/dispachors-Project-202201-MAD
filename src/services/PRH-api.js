@@ -22,7 +22,7 @@ export const saveBook = (book) => {
 export const deleteBook = (book) => {
     const URL = `http://localhost:4500/books/${book.id}`;
 
-    return axios.delete(URL, book.id);
+    return axios.delete(URL);
 };
 
 export const updateBook = (book) => {

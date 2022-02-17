@@ -9,22 +9,18 @@ import { ContextProvider } from './context/context-provider';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ContextProvider>
-            <BrowserRouter>
-                <Auth0Provider
-                    domain="dev-tbdb7-ah.us.auth0.com"
-                    clientId="msHFZi5o44WFfAiY5HCBk9w5ebn6rDeI"
-                    redirectUri={window.location.origin}
-                >
+        <Auth0Provider
+            domain="dev-tbdb7-ah.us.auth0.com"
+            clientId="msHFZi5o44WFfAiY5HCBk9w5ebn6rDeI"
+            redirectUri={window.location.origin}
+        >
+            <ContextProvider>
+                <BrowserRouter>
                     <App />
-                </Auth0Provider>
-            </BrowserRouter>
-        </ContextProvider>
+                </BrowserRouter>
+            </ContextProvider>
+        </Auth0Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

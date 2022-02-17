@@ -13,11 +13,30 @@ export function useContextValue() {
     }, []);
 
     const addBook = (book) => {
-        dispatcher(action.addBook(book));
+        console.log(book);
+        api.saveBook(book).then((resp) => {
+            console.log(resp.data);
+            dispatcher(action.addBook(resp.data));
+        });
     };
+
+    const deleteBook = (book) => {
+        api.deleteBook(book);
+        dispatcher(action.removeBook(book));
+    };
+
+    const updateBook = (book) => {
+        dispatcher(action.updateBook(book));
+    };
+
+    const userExists = (userID) =>
+        userBooks.find((item) => item.user === userID) !== undefined;
 
     return {
         addBook,
         userBooks,
+        userExists,
+        updateBook,
+        deleteBook,
     };
 }

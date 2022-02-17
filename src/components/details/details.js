@@ -1,10 +1,15 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable no-underscore-dangle */
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useState, useEffect, useContext } from 'react';
 import * as api from '../../services/PRH-api';
 import './details.scss';
+import { Context } from '../../context/context-provider';
 
 export function Details() {
+    const { user } = useAuth0();
+    const { addBook, userBooks, deleteBook } = useContext(Context);
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
     const titleURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}?api_key=mdmzpbe68gz2cc23pc7dhs28`;
@@ -21,7 +26,7 @@ export function Details() {
                 pages,
                 contentLink = data._links[6].href,
             } = data;
-            setBookState({ title, author, image, pages, contentLink });
+            setBookState({ isbn, title, author, image, pages, contentLink });
             api.getFromUrl(contentURL).then((response) => {
                 const { jacketquotes } = response.data.data.content;
                 setBookState((previous) => ({ ...previous, jacketquotes }));
@@ -29,7 +34,29 @@ export function Details() {
         });
     }, []);
 
-    console.log(bookState.jacketquotes);
+    const handleSave = () => {
+        if (
+            userBooks.filter(
+                (item) => item.isbn === bookState.isbn && item.user === user.sub
+            ).length !== 0
+        )
+            return;
+
+        const bookToAdd = {
+            user: user.sub,
+            isbn: bookState.isbn,
+            _links: [{}, { href: bookState.image }],
+            isRead: false,
+        };
+        addBook(bookToAdd);
+    };
+
+    const handleDelete = () => {
+        const bookToDelete = userBooks.find(
+            (item) => item.isbn === bookState.isbn && item.user === user.sub
+        );
+        if (bookToDelete !== undefined) deleteBook(bookToDelete);
+    };
 
     return (
         <section className="book-data">
@@ -55,11 +82,13 @@ export function Details() {
             </div>
             <div className="actions">
                 <input
+                    onClick={handleSave}
                     className="actions__save-button"
                     type="button"
                     value="Save"
                 />
                 <input
+                    onClick={handleDelete}
                     className="actions__delete-button"
                     type="button"
                     value="Delete"
