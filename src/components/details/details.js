@@ -8,7 +8,7 @@ import './details.scss';
 import { Context } from '../../context/context-provider';
 
 export function Details() {
-    const { user } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
     const { addBook, userBooks, deleteBook } = useContext(Context);
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
@@ -80,20 +80,29 @@ export function Details() {
                     dangerouslySetInnerHTML={{ __html: bookState.jacketquotes }}
                 />
             </div>
-            <div className="actions">
-                <input
-                    onClick={handleSave}
-                    className="actions__save-button"
-                    type="button"
-                    value="Save"
-                />
-                <input
-                    onClick={handleDelete}
-                    className="actions__delete-button"
-                    type="button"
-                    value="Delete"
-                />
-            </div>
+
+            {isAuthenticated ? (
+                <div className="actions">
+                    {userBooks.find((item) => item.isbn === bookState.isbn) ===
+                    undefined ? (
+                        <input
+                            onClick={handleSave}
+                            className="actions__save-button"
+                            type="button"
+                            value="Save"
+                        />
+                    ) : (
+                        <input
+                            onClick={handleDelete}
+                            className="actions__delete-button"
+                            type="button"
+                            value="Delete"
+                        />
+                    )}
+                </div>
+            ) : (
+                <p>Login to save this book</p>
+            )}
         </section>
     );
 }
