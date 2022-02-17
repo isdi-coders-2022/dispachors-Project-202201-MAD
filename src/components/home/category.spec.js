@@ -2,7 +2,7 @@
 import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { getFromCategory } from '../../services/PRH-api';
+
 import { Category } from './category';
 
 const server = setupServer();

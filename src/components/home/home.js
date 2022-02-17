@@ -1,6 +1,7 @@
 import { Category } from './category';
 import { randomCategories } from '../../services/helpers';
 import { BooksToRead } from './books-to-read';
+import './home.scss';
 
 export function Home() {
     return (
@@ -13,6 +14,7 @@ export function Home() {
                     categoryName={item.catName}
                 />
             ))}
+            <div className="buffer" />
         </>
     );
 }
