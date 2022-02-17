@@ -3,19 +3,19 @@ import { useContext } from 'react';
 import { Context } from '../../context/context-provider';
 import { Book } from '../core/book';
 
-export function BooksToRead() {
+export function ReadBooks() {
     const { userBooks } = useContext(Context);
     const { user } = useAuth0();
-    const booksToPrint = userBooks.filter((item) => item.user === user.sub);
-
-    console.log(booksToPrint);
+    const booksToPrint = userBooks.filter(
+        (item) => item.user === user?.sub && item.isRead === true
+    );
 
     return (
         <div className="pending">
-            <h2 className="pending__title">Books to Read</h2>
+            <h2 className="pending__title">Libros leídos</h2>
             <ul className="pending__books">
                 {booksToPrint.length === 0 ? (
-                    <p>You have not saved any book yet</p>
+                    <p>Aún no has guardado ningún libro</p>
                 ) : (
                     booksToPrint.map((item) => (
                         <Book key={item.isbn} book={item} />

@@ -6,9 +6,10 @@ import { useState, useEffect, useContext } from 'react';
 import * as api from '../../services/PRH-api';
 import './details.scss';
 import { Context } from '../../context/context-provider';
+import { StarRating } from '../saved-books/star-rating';
 
 export function Details() {
-    const { user } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
     const { addBook, userBooks, deleteBook, updateBook } = useContext(Context);
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
@@ -47,6 +48,7 @@ export function Details() {
             isbn: bookState.isbn,
             _links: [{}, { href: bookState.image }],
             isRead: false,
+            rating: 0,
         };
         addBook(bookToAdd);
     };
@@ -55,15 +57,15 @@ export function Details() {
         const bookToDelete = userBooks.find(
             (item) => item.isbn === bookState.isbn && item.user === user.sub
         );
-        if (bookToDelete !== undefined) deleteBook(bookToDelete);
-    };
-
-    const handleUpdate = () => {
-        const bookToUpdate = userBooks.find(
-            (item) => item.isbn === bookState.isbn && item.user === user.sub
-        );
-        if (bookToUpdate.isRead === false)
-            updateBook({ ...bookToUpdate, isRead: true });
+        if (bookToDelete !== undefined) {
+            if (bookToDelete.isRead === true) {
+                updateBook({
+                    ...bookToDelete,
+                    isRead: false,
+                    rating: 0,
+                });
+            } else deleteBook(bookToDelete);
+        }
     };
 
     return (
@@ -76,6 +78,7 @@ export function Details() {
                     alt=""
                 />
                 <div className="book-data__details">
+                    <StarRating bookState={bookState} />
                     <p>Author: {bookState.author}</p>
                     <p>Pages: {bookState.pages}</p>
                     <p>Topics:</p>
@@ -88,26 +91,35 @@ export function Details() {
                     dangerouslySetInnerHTML={{ __html: bookState.jacketquotes }}
                 />
             </div>
-            <div className="actions">
-                <input
-                    onClick={handleSave}
-                    className="actions__save-button"
-                    type="button"
-                    value="Save"
-                />
-                <input
-                    onClick={handleDelete}
-                    className="actions__delete-button"
-                    type="button"
-                    value="Delete"
-                />
-                <input
-                    onClick={handleUpdate}
-                    className="actions__update-button"
-                    type="button"
-                    value="Mark as Read"
-                />
-            </div>
+
+            {isAuthenticated ? (
+                <div className="actions">
+                    {userBooks.find((item) => item.isbn === bookState.isbn) ===
+                    undefined ? (
+                        <input
+                            onClick={handleSave}
+                            className="actions__save-button"
+                            type="button"
+                            value="Save"
+                        />
+                    ) : (
+                        <input
+                            onClick={handleDelete}
+                            className="actions__delete-button"
+                            type="button"
+                            value={
+                                userBooks.find(
+                                    (item) => item.isbn === bookState.isbn
+                                ).isRead === true
+                                    ? 'mark as unread'
+                                    : 'delete'
+                            }
+                        />
+                    )}
+                </div>
+            ) : (
+                <p>Login to save this book</p>
+            )}
         </section>
     );
 }

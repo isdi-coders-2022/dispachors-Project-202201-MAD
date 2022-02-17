@@ -25,8 +25,9 @@ export function useContextValue() {
     };
 
     const updateBook = (book) => {
-        api.updateBook(book);
-        dispatcher(action.updateBook(book));
+        api.updateBook(book).then((resp) => {
+            dispatcher(action.updateBook(resp.data));
+        });
     };
 
     const userExists = (userID) =>

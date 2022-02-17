@@ -2,39 +2,29 @@
   "books": [
     {
       "user": "google-oauth2|117072913009179683499",
-      "isbn": "9781593276669",
+      "isbn": "9780307772718",
       "_links": [
         {},
         {
-          "href": "https://images.randomhouse.com/cover/9781593276669"
+          "href": "https://images.randomhouse.com/cover/9780307772718"
         }
       ],
       "isRead": false,
-      "id": 2
-    },
-    {
-      "user": "google-oauth2|1170723499",
-      "isbn": "9780553213997",
-      "_links": [
-        {},
-        {
-          "href": "https://images.randomhouse.com/cover/9780553213997"
-        }
-      ],
-      "isRead": false,
-      "id": 4
+      "rating": 0,
+      "id": 3
     },
     {
       "user": "google-oauth2|117072913009179683499",
-      "isbn": "9781784781880",
+      "isbn": "9780262349079",
       "_links": [
         {},
         {
-          "href": "https://images.randomhouse.com/cover/9781784781880"
+          "href": "https://images.randomhouse.com/cover/9780262349079"
         }
       ],
       "isRead": false,
-      "id": 5
+      "rating": 0,
+      "id": 4
     }
   ]
 }
