@@ -14,7 +14,11 @@ export function Reducer(state, action) {
         case actionTypes.update:
             return state.map((item) =>
                 item.id === action.book.id
-                    ? { ...item, isRead: !item.isRead }
+                    ? {
+                          ...item,
+                          isRead: action.book.isRead,
+                          rating: action.book.rating,
+                      }
                     : item
             );
         default:

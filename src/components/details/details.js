@@ -57,15 +57,15 @@ export function Details() {
         const bookToDelete = userBooks.find(
             (item) => item.isbn === bookState.isbn && item.user === user.sub
         );
-        if (bookToDelete !== undefined) deleteBook(bookToDelete);
-    };
-
-    const handleUpdate = () => {
-        const bookToUpdate = userBooks.find(
-            (item) => item.isbn === bookState.isbn && item.user === user.sub
-        );
-        if (bookToUpdate.isRead === false)
-            updateBook({ ...bookToUpdate, isRead: true });
+        if (bookToDelete !== undefined) {
+            if (bookToDelete.isRead === true) {
+                updateBook({
+                    ...bookToDelete,
+                    isRead: false,
+                    rating: 0,
+                });
+            } else deleteBook(bookToDelete);
+        }
     };
 
     return (
@@ -78,15 +78,7 @@ export function Details() {
                     alt=""
                 />
                 <div className="book-data__details">
-                    <StarRating
-                        rating={
-                            userBooks.find(
-                                (item) =>
-                                    item.isbn === bookState.isbn &&
-                                    item.user === user?.sub
-                            )?.rating
-                        }
-                    />
+                    <StarRating bookState={bookState} />
                     <p>Author: {bookState.author}</p>
                     <p>Pages: {bookState.pages}</p>
                     <p>Topics:</p>
