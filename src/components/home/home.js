@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Category } from './category';
 import { randomCategories } from '../../services/helpers';
-import { BooksToRead } from './books-to-read';
+import { BooksToRead } from '../saved-books/books-to-read';
 import './home.scss';
 
 export function Home() {
