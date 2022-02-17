@@ -63,4 +63,7 @@
     &__delete-button {
         @extend .actions__save-button;
     }
+    &__update-button {
+        @extend .actions__save-button;
+    }
 }

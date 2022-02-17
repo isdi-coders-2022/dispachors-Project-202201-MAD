@@ -9,7 +9,7 @@ import { Context } from '../../context/context-provider';
 
 export function Details() {
     const { user } = useAuth0();
-    const { addBook, userBooks, deleteBook } = useContext(Context);
+    const { addBook, userBooks, deleteBook, updateBook } = useContext(Context);
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
     const titleURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}?api_key=mdmzpbe68gz2cc23pc7dhs28`;
@@ -58,6 +58,14 @@ export function Details() {
         if (bookToDelete !== undefined) deleteBook(bookToDelete);
     };
 
+    const handleUpdate = () => {
+        const bookToUpdate = userBooks.find(
+            (item) => item.isbn === bookState.isbn && item.user === user.sub
+        );
+        if (bookToUpdate.isRead === false)
+            updateBook({ ...bookToUpdate, isRead: true });
+    };
+
     return (
         <section className="book-data">
             <h2 className="book-data__title">{bookState.title}</h2>
@@ -92,6 +100,12 @@ export function Details() {
                     className="actions__delete-button"
                     type="button"
                     value="Delete"
+                />
+                <input
+                    onClick={handleUpdate}
+                    className="actions__update-button"
+                    type="button"
+                    value="Mark as Read"
                 />
             </div>
         </section>
