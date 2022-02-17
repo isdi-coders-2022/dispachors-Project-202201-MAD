@@ -15,7 +15,7 @@ export function BooksToRead() {
             <h2 className="pending__title">Books to Read</h2>
             <ul className="pending__books">
                 {booksToPrint.length === 0 ? (
-                    <p>You haven't saved any book yet</p>
+                    <p>You have not saved any book yet</p>
                 ) : (
                     booksToPrint.map((item) => (
                         <Book key={item.isbn} book={item} />
