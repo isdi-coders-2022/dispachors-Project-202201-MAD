@@ -1,30 +1,3 @@
 {
-  "books": [
-    {
-      "user": "google-oauth2|117072913009179683499",
-      "isbn": "9780307772718",
-      "_links": [
-        {},
-        {
-          "href": "https://images.randomhouse.com/cover/9780307772718"
-        }
-      ],
-      "isRead": false,
-      "rating": 0,
-      "id": 3
-    },
-    {
-      "user": "google-oauth2|117072913009179683499",
-      "isbn": "9780262349079",
-      "_links": [
-        {},
-        {
-          "href": "https://images.randomhouse.com/cover/9780262349079"
-        }
-      ],
-      "isRead": false,
-      "rating": 0,
-      "id": 4
-    }
-  ]
+  "books": []
 }
