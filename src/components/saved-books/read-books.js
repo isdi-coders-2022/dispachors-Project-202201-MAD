@@ -12,7 +12,7 @@ export function ReadBooks() {
 
     return (
         <div className="pending">
-            <h2 className="pending__title">Libros leídos</h2>
+            <h2 className="pending__title">Read books</h2>
             <ul className="pending__books">
                 {booksToPrint.length === 0 ? (
                     <p>You have not saved any books yet</p>
