@@ -1,229 +1,260 @@
-// import { rest } from 'msw';
-// import { setupServer } from 'msw/node';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
-// import * as api from './PRH-api';
+import * as api from './PRH-api';
 
-// const URL =
-//     'https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/categories/93/titles?rows=5&showCovers=true&sort=random&api_key=mdmzpbe68gz2cc23pc7dhs28';
+const URL =
+    'https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/categories/93/titles?rows=5&showCovers=true&sort=random&api_key=mdmzpbe68gz2cc23pc7dhs28';
 
-// const server = setupServer();
+const server = setupServer();
 
-// beforeAll(() => server.listen());
-// afterAll(() => server.close());
-// afterEach(() => server.resetHandlers());
+beforeAll(() => server.listen());
+afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
 
-// describe('Given the function getFromCategory in PRH-api.js', () => {
-//     describe('When calling it with a catID of 93', () => {
-//         test('Then it shold either return an object', async () => {
-//             server.use(
-//                 rest.get(URL, (req, response, context) =>
-//                     response(
-//                         context.status(200),
-//                         context.json({ catName: 'Romance', id: 3 })
-//                     )
-//                 )
-//             );
+describe('Given the function getFromCategory in PRH-api.js', () => {
+    describe('When calling it with a catID of 93', () => {
+        test('Then it shold either return an object', async () => {
+            server.use(
+                rest.get(URL, (req, response, context) =>
+                    response(
+                        context.status(200),
+                        context.json({ catName: 'Romance', id: 3 })
+                    )
+                )
+            );
 
-//             await expect((await api.getFromCategory(93)).data).toEqual({
-//                 catName: 'Romance',
-//                 id: 3,
-//             });
-//         });
-//         test('or catch an error', async () => {
-//             server.use(
-//                 rest.get(URL, (req, response, context) =>
-//                     response(context.status(404))
-//                 )
-//             );
+            await expect((await api.getFromCategory(93)).data).toEqual({
+                catName: 'Romance',
+                id: 3,
+            });
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.get(URL, (req, response, context) =>
+                    response(context.status(404))
+                )
+            );
 
-//             await expect(api.getFromCategory(93)).rejects.toThrow('404');
-//         });
-//     });
-// });
+            await expect(api.getFromCategory(93)).rejects.toThrowError('404');
+        });
+    });
+});
 
-// describe('Given the function getFromSaved in PRH-api.js', () => {
-//     describe('When calling it without parameters', () => {
-//         test('Then it shold either return an array of objects', async () => {
-//             server.use(
-//                 rest.get(
-//                     'http://localhost:4500/books/',
-//                     (req, response, context) =>
-//                         response(
-//                             context.status(200),
-//                             context.json([
-//                                 {
-//                                     title: 'Romeo & Juliet',
-//                                     author: 'Shakespeare',
-//                                     id: 1,
-//                                 },
-//                             ])
-//                         )
-//                 )
-//             );
+describe('Given the function getFromUrl in PRH-api.js', () => {
+    describe('When calling it with a catID of 93', () => {
+        test('Then it shold either return an object', async () => {
+            server.use(
+                rest.get(URL, (req, response, context) =>
+                    response(
+                        context.status(200),
+                        context.json({ catName: 'Romance', id: 3 })
+                    )
+                )
+            );
 
-//             expect((await api.getFromSaved()).data).toEqual([
-//                 {
-//                     title: 'Romeo & Juliet',
-//                     author: 'Shakespeare',
-//                     id: 1,
-//                 },
-//             ]);
-//         });
-//         test('or catch an error', async () => {
-//             server.use(
-//                 rest.get(
-//                     'http://localhost:4500/books/',
-//                     (req, response, context) => response(context.status(404))
-//                 )
-//             );
+            await expect((await api.getFromUrl(93)).data).toEqual({
+                catName: 'Romance',
+                id: 3,
+            });
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.get(URL, (req, response, context) =>
+                    response(context.status(404))
+                )
+            );
 
-//             await expect(api.getFromSaved()).rejects.toThrow('404');
-//         });
-//     });
-// });
+            await expect(api.getFromUrl(93)).rejects.toThrowError(
+                'Network Error'
+            );
+        });
+    });
+});
 
-// describe('Given the function saveBook in PRH-api.js', () => {
-//     describe('When calling it whith an object as a parameter', () => {
-//         test('Then it shold either return the object updated', async () => {
-//             server.use(
-//                 rest.post(
-//                     'http://localhost:4500/books/',
-//                     (req, response, context) =>
-//                         response(
-//                             context.status(200),
-//                             context.json({
-//                                 title: 'Romeo & Juliet',
-//                                 author: 'Shakespeare',
-//                                 id: 1,
-//                             })
-//                         )
-//                 )
-//             );
+describe('Given the function getFromSaved in PRH-api.js', () => {
+    describe('When calling it without parameters', () => {
+        test('Then it shold either return an array of objects', async () => {
+            server.use(
+                rest.get(
+                    'http://localhost:4500/books/',
+                    (req, response, context) =>
+                        response(
+                            context.status(200),
+                            context.json([
+                                {
+                                    title: 'Romeo & Juliet',
+                                    author: 'Shakespeare',
+                                    id: 1,
+                                },
+                            ])
+                        )
+                )
+            );
 
-//             expect(
-//                 (
-//                     await api.saveBook({
-//                         title: 'Romeo & Juliet',
-//                         author: 'Shakespeare',
-//                     })
-//                 ).data
-//             ).toEqual({
-//                 title: 'Romeo & Juliet',
-//                 author: 'Shakespeare',
-//                 id: 1,
-//             });
-//         });
-//         test('or catch an error', async () => {
-//             server.use(
-//                 rest.post(
-//                     'http://localhost:4500/books/',
-//                     (req, response, context) => response(context.status(404))
-//                 )
-//             );
+            expect((await api.getFromSaved()).data).toEqual([
+                {
+                    title: 'Romeo & Juliet',
+                    author: 'Shakespeare',
+                    id: 1,
+                },
+            ]);
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.get(
+                    'http://localhost:4500/books/',
+                    (req, response, context) => response(context.status(404))
+                )
+            );
 
-//             await expect(api.saveBook()).rejects.toThrow('404');
-//         });
-//     });
-// });
+            await expect(api.getFromSaved()).rejects.toThrowError('404');
+        });
+    });
+});
 
-// describe('Given the function deleteBook in PRH-api.js', () => {
-//     describe('When calling it whith an object as a parameter', () => {
-//         test('Then it shold either return the object updated', async () => {
-//             server.use(
-//                 rest.delete(
-//                     'http://localhost:4500/books/1',
-//                     (req, response, context) =>
-//                         response(
-//                             context.status(200),
-//                             context.json({
-//                                 title: 'Romeo & Juliet',
-//                                 author: 'Shakespeare',
-//                                 id: 1,
-//                             })
-//                         )
-//                 )
-//             );
+describe('Given the function saveBook in PRH-api.js', () => {
+    describe('When calling it whith an object as a parameter', () => {
+        test('Then it shold either return the object updated', async () => {
+            server.use(
+                rest.post(
+                    'http://localhost:4500/books/',
+                    (req, response, context) =>
+                        response(
+                            context.status(200),
+                            context.json({
+                                title: 'Romeo & Juliet',
+                                author: 'Shakespeare',
+                                id: 1,
+                            })
+                        )
+                )
+            );
 
-//             expect(
-//                 (
-//                     await api.deleteBook({
-//                         title: 'Romeo & Juliet',
-//                         author: 'Shakespeare',
-//                         id: 1,
-//                     })
-//                 ).data
-//             ).toEqual({
-//                 title: 'Romeo & Juliet',
-//                 author: 'Shakespeare',
-//                 id: 1,
-//             });
-//         });
-//         test('or catch an error', async () => {
-//             server.use(
-//                 rest.delete(
-//                     'http://localhost:4500/books/',
-//                     (req, response, context) => response(context.status(404))
-//                 )
-//             );
+            expect(
+                (
+                    await api.saveBook({
+                        title: 'Romeo & Juliet',
+                        author: 'Shakespeare',
+                    })
+                ).data
+            ).toEqual({
+                title: 'Romeo & Juliet',
+                author: 'Shakespeare',
+                id: 1,
+            });
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.post(
+                    'http://localhost:4500/books/',
+                    (req, response, context) => response(context.status(404))
+                )
+            );
 
-//             await expect(
-//                 api.deleteBook({
-//                     title: 'Romeo & Juliet',
-//                     author: 'Shakespeare',
-//                     id: 1,
-//                 })
-//             ).rejects.toThrow('404');
-//         });
-//     });
-// });
+            await expect(api.saveBook()).rejects.toThrowError('404');
+        });
+    });
+});
 
-// describe('Given the function updateBook in PRH-api.js', () => {
-//     describe('When calling it whith an object as a parameter', () => {
-//         test('Then it shold either return the object updated', async () => {
-//             server.use(
-//                 rest.patch(
-//                     'http://localhost:4500/books/1',
-//                     (req, response, context) =>
-//                         response(
-//                             context.status(200),
-//                             context.json({
-//                                 title: 'Othelo',
-//                                 author: 'Shakespeare',
-//                                 id: 1,
-//                             })
-//                         )
-//                 )
-//             );
+describe('Given the function deleteBook in PRH-api.js', () => {
+    describe('When calling it whith an object as a parameter', () => {
+        test('Then it shold either return the object updated', async () => {
+            server.use(
+                rest.delete(
+                    'http://localhost:4500/books/1',
+                    (req, response, context) =>
+                        response(
+                            context.status(200),
+                            context.json({
+                                title: 'Romeo & Juliet',
+                                author: 'Shakespeare',
+                                id: 1,
+                            })
+                        )
+                )
+            );
 
-//             expect(
-//                 (
-//                     await api.updateBook({
-//                         title: 'Othelo',
-//                         author: 'Shakespeare',
-//                         id: 1,
-//                     })
-//                 ).data
-//             ).toEqual({
-//                 title: 'Othelo',
-//                 author: 'Shakespeare',
-//                 id: 1,
-//             });
-//         });
-//         test('or catch an error', async () => {
-//             server.use(
-//                 rest.patch(
-//                     'http://localhost:4500/books/',
-//                     (req, response, context) => response(context.status(404))
-//                 )
-//             );
+            expect(
+                (
+                    await api.deleteBook({
+                        title: 'Romeo & Juliet',
+                        author: 'Shakespeare',
+                        id: 1,
+                    })
+                ).data
+            ).toEqual({
+                title: 'Romeo & Juliet',
+                author: 'Shakespeare',
+                id: 1,
+            });
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.delete(
+                    'http://localhost:4500/books/',
+                    (req, response, context) => response(context.status(404))
+                )
+            );
 
-//             await expect(
-//                 api.updateBook({
-//                     title: 'Othelo',
-//                     author: 'Shakespeare',
-//                     id: 1,
-//                 })
-//             ).rejects.toThrow('404');
-//         });
-//     });
-// });
+            await expect(
+                api.deleteBook({
+                    title: 'Romeo & Juliet',
+                    author: 'Shakespeare',
+                    id: 1,
+                })
+            ).rejects.toThrowError('Network Error');
+        });
+    });
+});
+
+describe('Given the function updateBook in PRH-api.js', () => {
+    describe('When calling it whith an object as a parameter', () => {
+        test('Then it shold either return the object updated', async () => {
+            server.use(
+                rest.patch(
+                    'http://localhost:4500/books/1',
+                    (req, response, context) =>
+                        response(
+                            context.status(200),
+                            context.json({
+                                title: 'Othelo',
+                                author: 'Shakespeare',
+                                id: 1,
+                            })
+                        )
+                )
+            );
+
+            expect(
+                (
+                    await api.updateBook({
+                        title: 'Othelo',
+                        author: 'Shakespeare',
+                        id: 1,
+                    })
+                ).data
+            ).toEqual({
+                title: 'Othelo',
+                author: 'Shakespeare',
+                id: 1,
+            });
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.patch(
+                    'http://localhost:4500/books/',
+                    (req, response, context) => response(context.status(404))
+                )
+            );
+
+            await expect(
+                api.updateBook({
+                    title: 'Othelo',
+                    author: 'Shakespeare',
+                    id: 1,
+                })
+            ).rejects.toThrowError('Network Error');
+        });
+    });
+});
