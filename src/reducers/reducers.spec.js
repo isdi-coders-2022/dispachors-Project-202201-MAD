@@ -22,4 +22,15 @@ describe('Given the function Reducer', () => {
             ]);
         });
     });
+    describe('When passing a state and the load action', () => {
+        test('then it should return the current state', () => {
+            const newState2 = Reducer(mockState, action.loadBooks(mockState));
+
+            expect(newState2).toEqual([
+                { id: 1, bookName: '1984' },
+                { id: 2, bookName: 'Soledad' },
+                { id: 3, bookName: 'Comedia' },
+            ]);
+        });
+    });
 });
