@@ -30,12 +30,12 @@ describe('Given the function Reducer', () => {
 
     describe('When passing a state and the remove action', () => {
         test('then it should return the state without the removed book', () => {
-            const currentState3 = Reducer(
+            const currentState = Reducer(
                 mockState,
                 action.removeBook({ id: 3, bookName: 'Comedia' })
             );
 
-            expect(currentState3).toEqual([
+            expect(currentState).toEqual([
                 { id: 1, bookName: '1984' },
                 { id: 2, bookName: 'Soledad' },
             ]);
@@ -44,12 +44,32 @@ describe('Given the function Reducer', () => {
 
     describe('When passing a state and the load action', () => {
         test('then it should return the current state', () => {
-            const newState2 = Reducer(mockState, action.loadBooks(mockState));
+            const newState = Reducer(mockState, action.loadBooks(mockState));
 
-            expect(newState2).toEqual([
+            expect(newState).toEqual([
                 { id: 1, bookName: '1984' },
                 { id: 2, bookName: 'Soledad' },
                 { id: 3, bookName: 'Comedia' },
+            ]);
+        });
+    });
+
+    describe('When passing a state and the update function', () => {
+        test('then it should return the state updated', () => {
+            const currentState = Reducer(
+                mockState,
+                action.updateBook({
+                    id: 3,
+                    bookName: 'Comedia',
+                    isRead: true,
+                    rating: 3,
+                })
+            );
+
+            expect(currentState).toEqual([
+                { id: 1, bookName: '1984' },
+                { id: 2, bookName: 'Soledad' },
+                { id: 3, bookName: 'Comedia', isRead: true, rating: 3 },
             ]);
         });
     });
