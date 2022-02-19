@@ -36,38 +36,7 @@ describe('Given the function getFromCategory in PRH-api.js', () => {
                 )
             );
 
-            await expect(api.getFromCategory(93)).rejects.toThrowError('404');
-        });
-    });
-});
-
-describe('Given the function getFromUrl in PRH-api.js', () => {
-    describe('When calling it with a catID of 93', () => {
-        test('Then it shold either return an object', async () => {
-            server.use(
-                rest.get(URL, (req, response, context) =>
-                    response(
-                        context.status(200),
-                        context.json({ catName: 'Romance', id: 3 })
-                    )
-                )
-            );
-
-            await expect((await api.getFromUrl(93)).data).toEqual({
-                catName: 'Romance',
-                id: 3,
-            });
-        });
-        test('or catch an error', async () => {
-            server.use(
-                rest.get(URL, (req, response, context) =>
-                    response(context.status(404))
-                )
-            );
-
-            await expect(api.getFromUrl(93)).rejects.toThrowError(
-                'Network Error'
-            );
+            await expect(api.getFromCategory(93)).rejects.toThrow('404');
         });
     });
 });
@@ -108,7 +77,7 @@ describe('Given the function getFromSaved in PRH-api.js', () => {
                 )
             );
 
-            await expect(api.getFromSaved()).rejects.toThrowError('404');
+            await expect(api.getFromSaved()).rejects.toThrow('404');
         });
     });
 });
@@ -152,7 +121,7 @@ describe('Given the function saveBook in PRH-api.js', () => {
                 )
             );
 
-            await expect(api.saveBook()).rejects.toThrowError('404');
+            await expect(api.saveBook()).rejects.toThrow('404');
         });
     });
 });
@@ -203,7 +172,7 @@ describe('Given the function deleteBook in PRH-api.js', () => {
                     author: 'Shakespeare',
                     id: 1,
                 })
-            ).rejects.toThrowError('Network Error');
+            ).rejects.toThrow('404');
         });
     });
 });
@@ -254,7 +223,7 @@ describe('Given the function updateBook in PRH-api.js', () => {
                     author: 'Shakespeare',
                     id: 1,
                 })
-            ).rejects.toThrowError('Network Error');
+            ).rejects.toThrow('404');
         });
     });
 });

@@ -28,7 +28,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --coverage all",
-        "test:coverage": "jest --coverage",
+        "test:coverage": "CI=true npm test -- --env=jsdom --coverage",
         "lint": "eslint .",
         "eject": "react-scripts eject",
         "sass": "Sass --watch ./src/sass:./src/css"
