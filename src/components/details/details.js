@@ -14,35 +14,21 @@ export function Details() {
     const [bookState, setBookState] = useState([]);
     const { isbn } = useParams();
     const titleURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}?api_key=mdmzpbe68gz2cc23pc7dhs28`;
-    const contentURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}/content?api_key=mdmzpbe68gz2cc23pc7dhs28
-`;
+    const contentURL = `https://api.penguinrandomhouse.com/resources/v2/title/domains/PRH.US/titles/${isbn}/content?api_key=mdmzpbe68gz2cc23pc7dhs28`;
 
     useEffect(() => {
         api.getFromUrl(titleURL).then((resp) => {
             const data = resp.data.data.titles[0];
-            const {
-                title,
-                author,
-                image = data._links[1].href,
-                pages,
-                contentLink = data._links[6].href,
-            } = data;
-            setBookState({ isbn, title, author, image, pages, contentLink });
+            const { title, author, image = data._links[1].href, pages } = data;
+            setBookState({ isbn, title, author, image, pages });
             api.getFromUrl(contentURL).then((response) => {
                 const { jacketquotes } = response.data.data.content;
                 setBookState((previous) => ({ ...previous, jacketquotes }));
             });
         });
-    }, []);
+    }, [contentURL, isbn, titleURL]);
 
     const handleSave = () => {
-        if (
-            userBooks.filter(
-                (item) => item.isbn === bookState.isbn && item.user === user.sub
-            ).length !== 0
-        )
-            return;
-
         const bookToAdd = {
             user: user.sub,
             isbn: bookState.isbn,
@@ -57,15 +43,15 @@ export function Details() {
         const bookToDelete = userBooks.find(
             (item) => item.isbn === bookState.isbn && item.user === user.sub
         );
-        if (bookToDelete !== undefined) {
-            if (bookToDelete.isRead === true) {
-                updateBook({
-                    ...bookToDelete,
-                    isRead: false,
-                    rating: 0,
-                });
-            } else deleteBook(bookToDelete);
-        }
+
+        if (bookToDelete.isRead === true) {
+            console.log(bookToDelete.isRead);
+            updateBook({
+                ...bookToDelete,
+                isRead: false,
+                rating: 0,
+            });
+        } else deleteBook(bookToDelete);
     };
 
     return (
@@ -75,7 +61,7 @@ export function Details() {
                 <img
                     className="book-data__cover"
                     src={bookState.image}
-                    alt=""
+                    alt="book cover"
                 />
                 <div className="book-data__details">
                     <StarRating bookState={bookState} />
