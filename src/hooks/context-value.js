@@ -30,13 +30,9 @@ export function useContextValue() {
         });
     };
 
-    const userExists = (userID) =>
-        userBooks.find((item) => item.user === userID) !== undefined;
-
     return {
         addBook,
         userBooks,
-        userExists,
         updateBook,
         deleteBook,
     };
