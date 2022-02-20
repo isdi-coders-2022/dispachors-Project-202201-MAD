@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { ReadBooks } from './read-books';
+import userEvent from '@testing-library/user-event';
 import { Context } from '../../context/context-provider';
 import { StarRating } from './star-rating';
+
+jest.mock('@auth0/auth0-react');
 
 const mockBook = {
     user: 'google-oauth2|117072913009179683499',
@@ -18,14 +20,40 @@ const mockBook = {
     id: 2,
 };
 
+const mockContextValue = {
+    userBooks: [mockBook],
+    updateBook: jest.fn(),
+};
+
 describe('Given the component StarRating', () => {
+    beforeEach(() => {
+        useAuth0.mockReturnValue({
+            user: { sub: 'google-oauth2|117072913009179683499' },
+        });
+    });
     describe('When rendering with a book passed by props', () => {
         test('Then it should render a number of stars', () => {
             render(
-                <Context.Provider>
-                    <StarRating />
+                <Context.Provider value={mockContextValue}>
+                    <StarRating bookState={mockBook} />
                 </Context.Provider>
             );
+
+            expect(screen.getAllByAltText(/solid star/i)).toHaveLength(3);
+            expect(screen.getAllByAltText(/empty star/i)).toHaveLength(2);
+
+            userEvent.click(screen.getAllByAltText(/empty star/i)[1]);
+            expect(mockContextValue.updateBook).toBeCalled();
+        });
+        test('And call the function updateBooks when clicking a star', () => {
+            render(
+                <Context.Provider value={mockContextValue}>
+                    <StarRating bookState={mockBook} />
+                </Context.Provider>
+            );
+
+            userEvent.click(screen.getAllByAltText(/empty star/i)[1]);
+            expect(mockContextValue.updateBook).toBeCalled();
         });
     });
 });
