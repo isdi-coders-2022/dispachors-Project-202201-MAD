@@ -2,6 +2,7 @@
 /* eslint-env jest */
 
 import ReactDOM from 'react-dom';
+// eslint-disable-next-line import/named
 import { ReactStrictMode, rootElement } from './index';
 
 jest.mock('react-dom', () => ({ render: jest.fn() }));
