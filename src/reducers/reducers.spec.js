@@ -73,4 +73,14 @@ describe('Given the function Reducer', () => {
             ]);
         });
     });
+    describe('When passing a state and an unknown action', () => {
+        test('then it should return the origninal state', () => {
+            const currentState = Reducer(mockState, {
+                type: 'unknown',
+                someObject: {},
+            });
+
+            expect(currentState).toEqual(mockState);
+        });
+    });
 });
