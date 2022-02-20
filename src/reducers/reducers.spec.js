@@ -73,4 +73,16 @@ describe('Given the function Reducer', () => {
             ]);
         });
     });
+
+    describe('When passing a state and the an unknown function', () => {
+        test('then it should return the same state', () => {
+            const currentState = Reducer(mockState, action === undefined);
+
+            expect(currentState).toEqual([
+                { id: 1, bookName: '1984' },
+                { id: 2, bookName: 'Soledad' },
+                { id: 3, bookName: 'Comedia' },
+            ]);
+        });
+    });
 });
