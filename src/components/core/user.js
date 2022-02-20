@@ -20,7 +20,7 @@ export function User() {
                         onClick={handleClick}
                         className="app-user__image"
                         src={userPic}
-                        alt="el pepe"
+                        alt="user"
                     />
                     <span
                         tabIndex={0}

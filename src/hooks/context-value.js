@@ -13,7 +13,6 @@ export function useContextValue() {
     }, []);
 
     const addBook = (book) => {
-        console.log(book);
         api.saveBook(book).then((resp) => {
             dispatcher(action.addBook(resp.data));
         });

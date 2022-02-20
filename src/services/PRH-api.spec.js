@@ -41,6 +41,35 @@ describe('Given the function getFromCategory in PRH-api.js', () => {
     });
 });
 
+describe('Given the function getFromUrl in PRH-api.js', () => {
+    describe('When calling it with a certain URL', () => {
+        test('Then it shold either return an object', async () => {
+            server.use(
+                rest.get(URL, (req, response, context) =>
+                    response(
+                        context.status(200),
+                        context.json({ catName: 'Romance', id: 3 })
+                    )
+                )
+            );
+
+            await expect((await api.getFromUrl(URL)).data).toEqual({
+                catName: 'Romance',
+                id: 3,
+            });
+        });
+        test('or catch an error', async () => {
+            server.use(
+                rest.get(URL, (req, response, context) =>
+                    response(context.status(404))
+                )
+            );
+
+            await expect(api.getFromCategory(93)).rejects.toThrow('404');
+        });
+    });
+});
+
 describe('Given the function getFromSaved in PRH-api.js', () => {
     describe('When calling it without parameters', () => {
         test('Then it shold either return an array of objects', async () => {

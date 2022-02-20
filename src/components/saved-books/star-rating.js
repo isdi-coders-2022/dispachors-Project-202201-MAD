@@ -39,7 +39,7 @@ export function StarRating({ bookState }) {
                         onClick={handleStarClick}
                         className={`book-data__rating ${i + 1}`}
                         src="/assets/estrella-solid.png"
-                        alt=""
+                        alt="solid star"
                     />
                 ) : (
                     <img
@@ -49,7 +49,7 @@ export function StarRating({ bookState }) {
                         onClick={handleStarClick}
                         className={`book-data__rating ${i + 1}`}
                         src="/assets/estrella-regular.png"
-                        alt=""
+                        alt="empty star"
                     />
                 )
             )}
