@@ -7,6 +7,12 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import { ContextProvider } from './context/context-provider';
 
+export const ReactStrictMode = (
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
+
 ReactDOM.render(
     <React.StrictMode>
         <Auth0Provider
