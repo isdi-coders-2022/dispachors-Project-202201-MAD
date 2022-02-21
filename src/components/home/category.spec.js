@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Router, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { getFromCategory } from '../../services/PRH-api';
 import { Category } from './category';
 
