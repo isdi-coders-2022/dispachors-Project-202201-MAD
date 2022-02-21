@@ -6,11 +6,6 @@ export const addBook = (book, userID) => ({
     userID,
 });
 
-export const addUser = (userID) => ({
-    type: actionTypes.addUser,
-    userID,
-});
-
 export const removeBook = (book) => ({
     type: actionTypes.remove,
     book,

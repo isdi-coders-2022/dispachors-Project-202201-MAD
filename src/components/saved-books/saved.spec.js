@@ -10,15 +10,17 @@ describe('Given the component SavedBooks', () => {
             const contextValue = {
                 userBooks: [
                     {
+                        user: 'google-oauth2|117072913009179683499',
+                        isbn: '9780767920384',
                         _links: [
                             {},
                             {
-                                rel: 'icon',
-                                href: 'https://images.randomhouse.com/cover/9780143128618',
-                                method: 'GET',
-                                parameters: null,
+                                href: 'https://images.randomhouse.com/cover/9780767920384',
                             },
                         ],
+                        isRead: true,
+                        rating: '3',
+                        id: 2,
                     },
                 ],
             };
@@ -28,7 +30,7 @@ describe('Given the component SavedBooks', () => {
                     <SavedBooks />
                 </Context.Provider>
             );
-            expect(screen.getByText(/read/i)).toBeTruthy();
+            expect(screen.getByText(/Read books/i)).toBeTruthy();
         });
     });
 });
