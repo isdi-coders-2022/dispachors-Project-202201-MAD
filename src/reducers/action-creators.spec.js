@@ -13,18 +13,6 @@ describe('Given the function addBook', () => {
     });
 });
 
-describe('Given the function addUser', () => {
-    describe('Whem importing it', () => {
-        test('then, it should work like this', () => {
-            const userID = { cosicas: 'estas' };
-            expect(action.addUser(userID)).toEqual({
-                userID: { cosicas: 'estas' },
-                type: '@books/addUser',
-            });
-        });
-    });
-});
-
 describe('Given the function removeBook', () => {
     describe('Whem importing it', () => {
         test('then, it should work like this', () => {
