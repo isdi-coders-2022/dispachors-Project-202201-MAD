@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { Book } from './book';
 
 const item = {
@@ -23,7 +24,13 @@ const item = {
 describe('Given the component Book', () => {
     describe('When rendering it', () => {
         test('Then it should appear on the screen', async () => {
-            render(<Book book={item} />);
+            render(
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/" element={<Book book={item} />} />
+                    </Routes>
+                </MemoryRouter>
+            );
 
             expect(screen.getByAltText(/book/i)).toBeTruthy();
         });
